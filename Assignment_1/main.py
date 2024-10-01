@@ -18,27 +18,15 @@ dependent_variable = 'fire'
 
 # Load the data
 fire_training = pd.read_csv(training_file)
-#print("Training data:")
-#print(fire_training.head())
-#print(fire_training.shape)
 
 # Split the data into independent and dependent variables
 x_training = fire_training.loc[:,independent_variables]
-#print("X_train:")
-#print(X_train.head())
-#print(X_train.shape)
-
-
 y_training = fire_training.loc[:,dependent_variable]
-#print("y_training:")
-#print(y_training.head())
-#print(y_training.shape)
+
 
 # Load the testing data
 fire_testing = pd.read_csv(testing_file)
-#print("Testing data:")
-#print(fire_testing.head())
-#print(fire_testing.shape)
+
 
 # Train the model from randomstate=0 to max iterations=1000 to train the logistic regression model
 clf = LogisticRegression(random_state=0, max_iter=1000).fit(x_training, y_training)
@@ -52,8 +40,27 @@ y_pred = clf.predict(x_testing)
 
 # Print the predicted values
 accuracy_training_data= clf.score(x_training, y_training)
-print("Accuracy of Training Data: ", accuracy_training_data)
-
 accuracy_test_data = clf.score(x_testing, y_testing)
+print("\nDefault Logistic Regression Model")
+print("Accuracy of Training Data: ", accuracy_training_data)
 print("Accuracy of New Data: ", accuracy_test_data)
 
+clf_tuned = LogisticRegression(random_state=0, max_iter=2000, C=0.8).fit(x_training, y_training)
+
+# Predict the testing data
+accuracy_training_tuned_data = clf_tuned.score(x_training, y_training)
+accuracy_test_data_tuned = clf_tuned.score(x_testing, y_testing)
+
+print("\nTuned Logistic Regression Model")
+print("Accuracy of Training Data: ", accuracy_training_tuned_data)
+print("Accuracy of New Data: ", accuracy_test_data_tuned)
+
+clf_tuned2 = LogisticRegression(random_state=0, max_iter=5000, C=1.5).fit(x_training, y_training)
+
+# Predict the testing data
+accuracy_training_tuned_data2 = clf_tuned2.score(x_training, y_training)
+accuracy_test_data_tuned2 = clf_tuned2.score(x_testing, y_testing)
+
+print("\nTuned Logistic Regression Model 2")
+print("Accuracy of Training Data: ", accuracy_training_tuned_data2)
+print("Accuracy of New Data: ", accuracy_test_data_tuned2)
