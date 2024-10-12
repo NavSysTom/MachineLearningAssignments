@@ -54,7 +54,7 @@ axs[1].legend()
 plt.tight_layout()
 plt.show()
 
-# Train the model from randomstate=0 to max iterations=1000 to train the logistic regression model
+# Train the model from max iterations=1000 to train the logistic regression model
 clf = LogisticRegression(max_iter=1000).fit(x_training, y_training)
 
 # Predict the training data
@@ -106,7 +106,6 @@ y_pred = clf.predict(x_testing)
 conf_matrix = confusion_matrix(y_testing, y_pred)
 
 print("\nConfusion Matrix for Logistic Regression Model:")
-print(conf_matrix)
 
 # Plotting the confusion matrix
 plt.figure(figsize=(10, 7))
